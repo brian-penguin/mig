@@ -9,5 +9,11 @@ module Mig
     def __print_version
       puts Mig::VERSION
     end
+
+    desc "indices", "list the indices"
+    def indices
+      client = Elasticsearch::Client.new
+      puts client.indices
+    end
   end
 end
