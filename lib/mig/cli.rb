@@ -3,9 +3,11 @@ require "mig"
 
 module Mig
   class CLI < Thor
-    desc "hello <NAME>", "Says hi back to you"
-    def hello(name)
-      puts "hello #{name}"
+    map %w[--version -v] => :__print_version
+
+    desc "--version, -v", "print the version"
+    def __print_version
+      puts Mig::VERSION
     end
   end
 end
