@@ -3,13 +3,18 @@ module Mig::Elasticsearch
     # This will return the value as text. There is no JSON endpoint
     def indices
       response = get_request(indices_path)
-      response.body
+      response
     end
 
     private
 
     def get_request(path)
-      ::Typhoeus.get(path, headers: default_headers)
+      response = ::Typhoeus.get(path, headers: default_headers)
+      if response.code == 200
+        response.body
+      else
+        raise Mig::Elasticsearch::Error.new("Failed to make request to #{path}\nrequest status: #{response.code} \nbody: #{response.body}")
+      end
     end
 
     def default_headers

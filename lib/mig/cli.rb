@@ -14,6 +14,8 @@ module Mig
     def indices
       client = Elasticsearch::Client.new
       puts client.indices
+    rescue => err
+      puts err.message
     end
   end
 end

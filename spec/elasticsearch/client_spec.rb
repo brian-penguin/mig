@@ -4,13 +4,13 @@ RSpec.describe Mig::Elasticsearch::Client do
       client = Mig::Elasticsearch::Client.new
 
       response = {
-        body: JSON.generate({foo: "bar"}),
+        body: "The response for this endpoint is just text",
         status: 200,
       }
       stub_request(:get, "http://localhost:9200/_cat/indices?v").to_return(response)
 
       results = client.indices
-      expect(results).to eq({"foo" => "bar"})
+      expect(results).to eq("The response for this endpoint is just text")
     end
   end
 end
